@@ -1,51 +1,32 @@
+## 🔁 Full Setup (Bash Script)
 
-#!/bin/bash
+If you're on Linux or macOS (or using Git Bash on Windows), you can run the entire project pipeline in one go using this script:
 
-# -------------------------------
-# Semantic Maritime Communication System
-# -------------------------------
-echo "🔧 Setting up project..."
-
-# Clone repo
+```bash
+# Clone the repository
 git clone https://github.com/your-username/semantic_communication_system.git
 cd semantic_communication_system
 
-# Set up virtual environment
-echo "🐍 Creating virtual environment..."
+# Create and activate virtual environment
 python -m venv .venv
-source .venv/bin/activate || source .venv/Scripts/activate
+source .venv/bin/activate        # On macOS/Linux
+# .venv\Scripts\activate         # On Windows PowerShell
 
-# Install dependencies
-echo "📦 Installing packages..."
+# Install required Python packages
 pip install --upgrade pip
 pip install -r requirements.txt
 
-# -------------------------------
-# Data Processing
-# -------------------------------
-
-# Download raw AIS data
-echo "🌍 Downloading AIS data..."
+# Download AIS data (zipped and extracted)
 python scripts/download_ais_data.py
 
-# Generate maritime sentence data
-echo "✍️  Generating training sentences..."
+# Generate structured maritime sentences from AIS data
 python scripts/generate_sentences.py
 
-# Build tokenizer vocabulary
-echo "🔤 Building tokenizer vocabulary..."
+# Build the tokenizer vocabulary from generated sentences
 python utils/build_vocab.py
 
-# -------------------------------
-# Model Training
-# -------------------------------
-echo "🧠 Starting model training..."
+# Train the semantic communication model
 python scripts/train.py
 
-# -------------------------------
-# Evaluation
-# -------------------------------
-echo "🧪 Running evaluation..."
+# Evaluate model performance using BLEU and Semantic Similarity
 python scripts/evaluate.py
-
-echo "✅ Done!"
