@@ -21,8 +21,7 @@ cd semantic_communication_system
 python -m venv .venv
 
 # Activate it
-source .venv/bin/activate        # For macOS/Linux
-# .venv\Scripts\activate         # For Windows PowerShell
+.venv\Scripts\activate         # For Windows PowerShell
 ```
 
 ---
