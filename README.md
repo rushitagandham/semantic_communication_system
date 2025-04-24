@@ -1,32 +1,105 @@
-## 🔁 Full Setup (Bash Script)
+## 🔁 One-Click Setup (Full Bash Workflow)
 
-If you're on Linux or macOS (or using Git Bash on Windows), you can run the entire project pipeline in one go using this script:
+Get the full **Semantic Maritime Communication System** up and running in a few simple commands!  
+Everything from environment setup to evaluation — just copy, paste, and go 💻✨
+
+---
+
+### 🛠️ Step 1: Clone the Repository
 
 ```bash
-# Clone the repository
 git clone https://github.com/your-username/semantic_communication_system.git
 cd semantic_communication_system
+```
 
-# Create and activate virtual environment
+---
+
+### 🐍 Step 2: Set Up the Virtual Environment
+
+```bash
+# Create a virtual environment
 python -m venv .venv
-source .venv/bin/activate        # On macOS/Linux
-# .venv\Scripts\activate         # On Windows PowerShell
 
-# Install required Python packages
+# Activate it
+source .venv/bin/activate        # For macOS/Linux
+# .venv\Scripts\activate         # For Windows PowerShell
+```
+
+---
+
+### 📦 Step 3: Install Dependencies
+
+```bash
 pip install --upgrade pip
 pip install -r requirements.txt
+```
 
-# Download AIS data (zipped and extracted)
+---
+
+### 🌍 Step 4: Download AIS Dataset
+
+```bash
 python scripts/download_ais_data.py
+```
 
-# Generate structured maritime sentences from AIS data
+This will download and unzip **AIS vessel data** from NOAA’s MarineCadastre.gov.
+
+---
+
+### ✍️ Step 5: Generate Maritime Sentences
+
+```bash
 python scripts/generate_sentences.py
+```
 
-# Build the tokenizer vocabulary from generated sentences
+Converts AIS CSV data into structured natural language sentences like:
+
+> `Cargo vessel Blue Whale heading to Port of LA at 12.5 knots.`
+
+---
+
+### 🔤 Step 6: Build the Tokenizer Vocabulary
+
+```bash
 python utils/build_vocab.py
+```
 
-# Train the semantic communication model
+Builds the vocabulary from generated maritime messages.
+
+---
+
+### 🧠 Step 7: Train the Semantic Communication Model
+
+```bash
 python scripts/train.py
+```
 
-# Evaluate model performance using BLEU and Semantic Similarity
+This trains a transformer + CNN pipeline that encodes, transmits (through a noisy channel), and decodes maritime messages.
+
+---
+
+### 🧪 Step 8: Evaluate Model Performance
+
+```bash
 python scripts/evaluate.py
+```
+
+You’ll see outputs like:
+
+```text
+--- SAMPLE ---
+Ref : Cargo ship heading to Port LA at 15 knots.
+Pred: Cargo vessel en route to Port LA at 15 knots.
+BLEU: 0.71 | Semantic Sim: 0.93
+```
+
+---
+
+> ⚠️ **Note**:  
+> This repo excludes large raw data and model files for size reasons.  
+> You can regenerate everything using the commands above.
+
+---
+
+📫 Questions or feedback? Open an issue or start a discussion!  
+📜 Licensed under MIT — feel free to fork, remix, or contribute!
